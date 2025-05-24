@@ -13,12 +13,12 @@ export default defineConfig(({ mode }) => ({
       // '/foo': 'http://localhost:3000',
       // with options
       '/api': {
-        target: 'http://192.168.2.25:3000',
+        target: 'http://192.168.2.20:3000',
         changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, '') // if your backend doesn't expect /api prefix
+        //rewrite: (path) => path.replace(/^\/api/, '') // if your backend doesn't expect /api prefix
       },
       '/by-restaurant': {
-        target: 'http://192.168.2.25:3000',
+        target: 'http://192.168.2.20:3000',
         changeOrigin: true,
       },
     }

@@ -49,10 +49,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           {/* Landing Page */}
-          <Route path="/" element={<LandingPage />} />
+          {/* <Route path="/" element={<LandingPage />} /> */}
           
           {/* Auth Routes */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />2
           <Route path="/register" element={<Register />} />
           
           {/* Admin Dashboard */}
