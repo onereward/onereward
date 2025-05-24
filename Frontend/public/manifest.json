@@ -1,0 +1,21 @@
+{
+  "name": "OneReward App",
+  "short_name": "OneReward",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "A PWA version of OneReward App",
+  "icons": [
+    {
+      "src": "/icons/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
