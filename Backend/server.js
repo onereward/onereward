@@ -7,6 +7,7 @@ const Offer = require('./Model/Offer');
 const authRoute = require('./routes/auth');
 const redemptionRoutes = require("./routes/redeem");
 const User = require('./Model/User');
+const fetch = require("node-fetch");
 
 
 app.use(express.json());
@@ -264,6 +265,66 @@ app.get("/api/restaurant/:restaurantName/customers", async (req, res) => {
     res.status(500).json({ message: "Error fetching restaurant customers", error });
   }
 });
+
+
+const notificationSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  body: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
+  createdBy: { type: String, required: true }
+});
+
+// Customer Model
+const Notification = mongoose.model("Notification", notificationSchema);
+
+app.post("/api/notifications", async (req, res) => {
+  try {
+    let formData = req.body;
+    let notif = new Notification({
+      title: formData.title,
+      body: formData.body,
+      createdBy: formData.createdBy
+    });
+
+    await fetch("https://api.onesignal.com/notifications?c=push", {
+      method: "POST", 
+      headers: {
+        "Authorization": `Key REPLACE_WITH_ONESIGNAL_API_KEY`,
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        app_id: "REPLACE_WITH_ONESIGNAL_APP_ID",
+        contents: {
+          en: formData.body
+        },
+        headings: {
+          en: formData.title
+        }
+      })
+    });
+
+    await notif.save();
+
+    res.status(201).json({ message: "Notification created successfully" });
+  } catch (e) {
+    res.status(500).json({ message: "Unable to send notification" });
+  }
+});
+
+app.get("/api/notifications", async (req, res) => {
+  try {
+    let createdby = decodeURIComponent(req.query.createdby);
+
+    let data = await Notification.find({ createdBy: createdby });
+
+    res.status(200).json(data);
+  } catch (e) {
+    res.status(500).json({ message: "Unable to fetch notification" });
+  }
+});
+
+
 
 // Get customer details by ID
 app.get("/api/customers/:id", async (req, res) => {

@@ -8,6 +8,7 @@ import {
   Menu,
   X,
   LogOut,
+  Bell
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -65,6 +66,7 @@ const RestaurantLayout = () => {
   const navItems = [
     { path: "/restaurant/dashboard", icon: BarChart3, label: "Dashboard" },
     { path: "/restaurant/customers", icon: Users, label: "Customers" },
+    { path: "/restaurant/notifications", icon: Bell, label: "Notifications" },
     { path: "/restaurant/points", icon: CreditCard, label: "Points Management" },
     { path: "/restaurant/card-design", icon: Palette, label: "Card Design" },
   ];

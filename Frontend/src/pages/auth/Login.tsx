@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +27,21 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("customer");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      if (user.userType === "admin") {
+        return navigate("/admin");
+      } else if (user.userType === "restaurant") {
+        return navigate("/restaurant/dashboard");
+      } else if (user.userType === "scanner") {
+        return navigate("/scanner");
+      } else {
+        return navigate("/customer/home");
+      }
+    }
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

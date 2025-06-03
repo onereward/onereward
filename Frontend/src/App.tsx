@@ -18,6 +18,7 @@ import ContentLinks from "./pages/admin/ContentLinks";
 
 // Restaurant dashboard pages
 import RestaurantDashboard from "./pages/restaurant/Dashboard";
+import RestaurantNotifications from "./pages/restaurant/Notifications";
 import RestaurantCustomers from "./pages/restaurant/Customers";
 import RestaurantPoints from "./pages/restaurant/Points";
 import RestaurantCardDesign from "./pages/restaurant/CardDesign";
@@ -72,6 +73,7 @@ const App = () => (
             <Route index element={<Navigate to="/restaurant/dashboard" replace />} />
             <Route path="dashboard" element={<RestaurantDashboard />} />
             <Route path="customers" element={<RestaurantCustomers />} />
+            <Route path="notifications" element={<RestaurantNotifications />} />
             <Route path="points" element={<RestaurantPoints />} />
             <Route path="card-design" element={<RestaurantCardDesign />} />
           </Route>
